@@ -1,0 +1,9 @@
+{
+  "name": "software-requirements",
+  "version": "0.1.0",
+  "description": "Refines informal descriptions into structured software requirements documents",
+  "author": {
+    "name": "Remy"
+  },
+  "keywords": ["requirements", "specification", "planning", "documentation"]
+}
