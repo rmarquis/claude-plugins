@@ -1,0 +1,9 @@
+{
+  "name": "software-architecture",
+  "version": "0.1.0",
+  "description": "Design internal software architecture using principles from 'A Philosophy of Software Design' by John Ousterhout",
+  "author": {
+    "name": "Remy"
+  },
+  "keywords": ["architecture", "design", "ousterhout", "modules", "complexity"]
+}
