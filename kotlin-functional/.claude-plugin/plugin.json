@@ -1,0 +1,38 @@
+{
+  "name": "kotlin-functional",
+  "version": "1.0.0",
+  "description": "Generate functional-first, idiomatic Kotlin implementations with comprehensive KDoc documentation",
+  "author": "Claude",
+  "tags": ["kotlin", "functional-programming", "documentation", "implementation"],
+  "agents": [
+    {
+      "name": "functional-implementer",
+      "description": "Generates functional Kotlin implementations from specifications",
+      "path": "agents/functional-implementer.md"
+    },
+    {
+      "name": "functional-reviewer",
+      "description": "Reviews code for functional and idiomatic Kotlin patterns",
+      "path": "agents/functional-reviewer.md"
+    }
+  ],
+  "commands": [
+    {
+      "name": "implement-functional",
+      "description": "Generate functional Kotlin implementation from specification",
+      "path": "commands/implement-functional.md"
+    },
+    {
+      "name": "review-functional",
+      "description": "Review code for functional/idiomatic patterns",
+      "path": "commands/review-functional.md"
+    }
+  ],
+  "skills": [
+    {
+      "name": "kotlin-functional-idioms",
+      "description": "Core knowledge of functional Kotlin patterns and idioms",
+      "path": "skills/kotlin-functional-idioms/SKILL.md"
+    }
+  ]
+}
