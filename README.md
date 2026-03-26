@@ -22,7 +22,7 @@ Design internal software architecture using Ousterhout's "A Philosophy of Softwa
 
 ### software-specification
 
-Generate executable kotlin-test specifications (contracts, behaviors, properties) before implementation.
+Generate executable test specifications (contracts, behaviors, properties) before implementation.
 
 - `/specification-write` — generate specs from architecture and requirements
 - Skill: `specification-engineering` | Agent: `specification-writer`

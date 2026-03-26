@@ -1,6 +1,6 @@
 # Software Specification Plugin
 
-Bridge architecture and implementation through executable test specifications in Kotlin using `kotlin-test`.
+Bridge architecture and implementation through executable test specifications.
 
 ## Overview
 
@@ -10,7 +10,7 @@ This plugin implements **specification-first development**: write executable spe
 - **Behavioral documentation** that is always up-to-date
 - **Property invariants** that must hold for all inputs
 
-Specifications are derived from architecture documents (produced by `software-architecture`) and requirements documents (produced by `software-requirements`).
+Specifications are derived from architecture documents (produced by `software-architecture`) and requirements documents (produced by `software-requirements`). The plugin adapts to the project's language and test framework.
 
 ## Components
 
@@ -26,7 +26,7 @@ Specifications are derived from architecture documents (produced by `software-ar
 /specification-write [architecture-file-or-module-name]
 ```
 
-Reads architecture and requirements documents, then generates executable specifications saved to `docs/specifications/<feature-name>/`.
+Reads architecture and requirements documents, detects the project's language and test framework, then generates executable specifications saved to `docs/specifications/<feature-name>/`.
 
 ### Proactive Triggering
 
@@ -47,7 +47,7 @@ docs/specifications/<feature-name>/
 └── properties/          # Property-based specifications
 ```
 
-Each file is a `.kt` specification file using `kotlin-test` that can later be moved to the test source set for compilation.
+Each file uses the project's test framework and can be moved to the test source set when implementation begins.
 
 ### Three Specification Levels
 
@@ -67,10 +67,10 @@ This plugin completes the specification-first workflow:
 1. Use `/requirements-refine` to create structured requirements
 2. Use `/architecture-design` to design the architecture
 3. Use `/specification-write` to generate executable specifications
-4. Implement against the specifications in `src/main/kotlin/` + `src/test/kotlin/`
+4. Implement against the specifications
 
 ## Design Decisions
 
-- **Output to `docs/specifications/`** rather than test source set - specs serve as documentation first, moved to tests when implementation begins
-- **Property generators via `kotlin.random`** - no external dependencies, lightweight extension functions on `Random`
-- **kotlin-test only** - standard library, no Kotest or JUnit 5 dependency
+- **Output to `docs/specifications/`** rather than test source set — specs serve as documentation first, moved to tests when implementation begins
+- **Language-agnostic** — adapts to the project's language and test framework
+- **Prefers standard/built-in test frameworks** — no heavy external dependencies

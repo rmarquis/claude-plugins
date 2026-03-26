@@ -111,15 +111,15 @@ Review each module for these property types:
 
 - [ ] Generators produce valid domain objects
 - [ ] Generators cover the full range of valid inputs
-- [ ] Generators are extension functions on `Random`
-- [ ] Seed is deterministic (e.g., `Random(seed = 42)`)
+- [ ] Generators use the language's standard random library
+- [ ] Seed is deterministic for reproducibility
 
 ### Test Structure
 
-- [ ] Uses `repeat(100)` for iteration count (adjust as needed)
+- [ ] Iterates each property ~100 times (adjust as needed)
 - [ ] Assertions verify the property invariant
 - [ ] Failure messages include the input that failed
-- [ ] No external property testing dependencies (kotlin.random only)
+- [ ] No heavy external property testing dependencies — prefer standard library
 
 ## Traceability Matrix
 
@@ -139,11 +139,11 @@ Complete this matrix for each feature:
 docs/specifications/<feature>/
 ├── README.md              [ ] Created
 ├── contracts/
-│   └── *ContractSpec.kt   [ ] All interfaces covered
+│   └── *ContractSpec.<ext>   [ ] All interfaces covered
 ├── behaviors/
-│   └── *BehaviorSpec.kt   [ ] All FRs covered
+│   └── *BehaviorSpec.<ext>   [ ] All FRs covered
 └── properties/
-    └── *PropertySpec.kt   [ ] Key modules covered
+    └── *PropertySpec.<ext>   [ ] Key modules covered
 ```
 
 ### README.md Index
@@ -158,8 +158,8 @@ docs/specifications/<feature>/
 
 Each specification file must have:
 
-- [ ] Package declaration matching directory structure
-- [ ] kotlin-test imports (no external test dependencies)
+- [ ] Package/module declaration matching directory structure
+- [ ] Test framework imports (prefer standard/built-in framework)
 - [ ] Documentation header with:
   - [ ] Description of what is specified
   - [ ] Reference to architecture document
@@ -200,7 +200,7 @@ Before finalizing specifications, answer:
 ## Common Issues to Check
 
 - [ ] No implementation code in specification files (use TODO placeholders)
-- [ ] No external test dependencies beyond kotlin-test
+- [ ] No heavy external test dependencies beyond the standard test framework
 - [ ] No hardcoded test data that should be generated
 - [ ] No tests that depend on execution order
 - [ ] No tests that depend on external state (files, network, etc.)

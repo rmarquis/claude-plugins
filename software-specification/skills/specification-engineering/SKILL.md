@@ -1,12 +1,14 @@
 ---
 name: specification-engineering
-description: This skill should be used when the user asks to "write specifications", "create test specs", "specify interfaces", "contract testing", "behavior specifications", "property-based testing", "BDD specs", "given when then", "specification-first", "contract-first", "executable contracts", "kotlin-test specifications", "test before implementation", "formal contracts", "interface contracts", or discusses writing executable tests that define behavior before implementation. Provides patterns for contract, behavior, and property-based specifications using kotlin-test.
-version: 0.1.0
+description: This skill should be used when the user asks to "write specifications", "create test specs", "specify interfaces", "contract testing", "behavior specifications", "property-based testing", "BDD specs", "given when then", "specification-first", "contract-first", "executable contracts", "test specifications", "test before implementation", "formal contracts", "interface contracts", or discusses writing executable tests that define behavior before implementation. Provides patterns for contract, behavior, and property-based specifications using the project's test framework.
+version: 0.2.0
 ---
 
 # Executable Specifications
 
-Write executable test specifications in Kotlin using `kotlin-test` that serve as formal contracts, behavioral documentation, and property invariants. Specifications are written BEFORE implementation and define what the system must do.
+Write executable test specifications that serve as formal contracts, behavioral documentation, and property invariants. Specifications are written BEFORE implementation and define what the system must do.
+
+Adapt all patterns below to the project's language and test framework.
 
 ## Core Philosophy
 
@@ -63,59 +65,45 @@ Contract specs define the obligations of each interface method.
 
 **Structure:**
 
-```kotlin
-package specifications.<feature>.contracts
+```
+// File: <Interface>ContractSpec.<ext>
+// Package/module: specifications.<feature>.contracts
 
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertNotNull
-import kotlin.test.assertNull
-import kotlin.test.assertFailsWith
+// Import: test framework assertions (assertEquals, assertNotNull, assertThrows, etc.)
 
-/**
- * Contract specification for [InterfaceName].
- *
- * Architecture: docs/architecture/<feature>.md
- * Module: [ModuleName]
- */
-class <Interface>ContractSpec {
+// Contract specification for [InterfaceName].
+//
+// Architecture: docs/architecture/<feature>.md
+// Module: [ModuleName]
 
-    private val sut: <Interface> = TODO("Provide implementation")
+class <Interface>ContractSpec:
+
+    sut: <Interface> = unimplemented("Provide implementation")
 
     // --- Method: save ---
 
-    @Test
-    fun `save returns entity with generated id`() {
-        val input = createValidEntity()
-        val result = sut.save(input)
+    test "save returns entity with generated id":
+        input = createValidEntity()
+        result = sut.save(input)
         assertNotNull(result.id)
-    }
 
-    @Test
-    fun `save throws for invalid entity`() {
-        val invalid = createInvalidEntity()
-        assertFailsWith<IllegalArgumentException> {
+    test "save throws for invalid entity":
+        invalid = createInvalidEntity()
+        assertThrows(IllegalArgumentException):
             sut.save(invalid)
-        }
-    }
 
     // --- Method: findById ---
 
-    @Test
-    fun `findById returns null for non-existent id`() {
-        val result = sut.findById(nonExistentId())
+    test "findById returns null for non-existent id":
+        result = sut.findById(nonExistentId())
         assertNull(result)
-    }
 
     // --- Method: delete ---
 
-    @Test
-    fun `delete is idempotent`() {
-        val id = existingEntityId()
+    test "delete is idempotent":
+        id = existingEntityId()
         sut.delete(id)
-        sut.delete(id) // second call should not throw
-    }
-}
+        sut.delete(id)  // second call should not throw
 ```
 
 **Guidelines:**
@@ -136,50 +124,42 @@ Behavior specs verify acceptance criteria using Given-When-Then structure.
 
 **Structure:**
 
-```kotlin
-package specifications.<feature>.behaviors
+```
+// File: <Feature>BehaviorSpec.<ext>
+// Package/module: specifications.<feature>.behaviors
 
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
-import kotlin.test.assertFalse
+// Import: test framework assertions
 
-/**
- * Behavior specification for [Feature].
- *
- * Requirements: docs/requirements/<feature>.md
- * Traces: FR-1, FR-2, FR-3
- */
-class <Feature>BehaviorSpec {
+// Behavior specification for [Feature].
+//
+// Requirements: docs/requirements/<feature>.md
+// Traces: FR-1, FR-2, FR-3
+
+class <Feature>BehaviorSpec:
 
     // FR-1: User Registration
-    @Test
-    fun `given valid credentials when user registers then account is created`() {
+    test "given valid credentials when user registers then account is created":
         // Given
-        val credentials = validCredentials()
+        credentials = validCredentials()
 
         // When
-        val result = registrationService.register(credentials)
+        result = registrationService.register(credentials)
 
         // Then
         assertTrue(result.isSuccess)
         assertNotNull(result.accountId)
-    }
 
     // FR-1: User Registration - duplicate check
-    @Test
-    fun `given existing email when user registers then registration fails with duplicate error`() {
+    test "given existing email when user registers then registration fails with duplicate error":
         // Given
-        val existing = existingUserCredentials()
+        existing = existingUserCredentials()
 
         // When
-        val result = registrationService.register(existing)
+        result = registrationService.register(existing)
 
         // Then
         assertTrue(result.isFailure)
         assertEquals("EMAIL_DUPLICATE", result.errorCode)
-    }
-}
 ```
 
 **Guidelines:**
@@ -202,169 +182,95 @@ Property specs verify invariants that must hold for all inputs using random gene
 
 **Structure:**
 
-```kotlin
-package specifications.<feature>.properties
+```
+// File: <Module>PropertySpec.<ext>
+// Package/module: specifications.<feature>.properties
 
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
-import kotlin.random.Random
+// Import: test framework assertions, standard library random
 
-/**
- * Property-based specification for [ModuleName].
- *
- * Architecture: docs/architecture/<feature>.md
- * Requirements: docs/requirements/<feature>.md
- * Module: [ModuleName]
- */
-class <Module>PropertySpec {
+// Property-based specification for [ModuleName].
+//
+// Architecture: docs/architecture/<feature>.md
+// Requirements: docs/requirements/<feature>.md
+// Module: [ModuleName]
 
-    private val random = Random(seed = 42) // deterministic
+class <Module>PropertySpec:
+
+    random = seededRandom(42)  // deterministic for reproducibility
 
     // --- Generators ---
 
-    private fun Random.alphaString(length: IntRange = 1..50): String =
-        (1..nextInt(length.first, length.last + 1))
-            .map { ('a'..'z').random(this) }
-            .joinToString("")
+    function randomAlphaString(length: 1..50) -> String:
+        // generate random alphabetic string of given length
 
-    private fun Random.positiveInt(max: Int = Int.MAX_VALUE): Int =
-        nextInt(1, max)
+    function randomPositiveInt(max) -> Int:
+        // generate random positive integer
 
     // --- Properties ---
 
-    @Test
-    fun `roundtrip - save then findById returns equivalent entity`() {
-        repeat(100) {
-            val entity = random.validEntity()
-            val saved = sut.save(entity)
-            val found = sut.findById(saved.id)
+    test "roundtrip - save then findById returns equivalent entity":
+        for 100 iterations:
+            entity = randomValidEntity()
+            saved = sut.save(entity)
+            found = sut.findById(saved.id)
             assertEquals(saved, found)
-        }
-    }
 
-    @Test
-    fun `idempotence - delete called twice has same effect as once`() {
-        repeat(100) {
-            val entity = random.validEntity()
-            val saved = sut.save(entity)
+    test "idempotence - delete called twice has same effect as once":
+        for 100 iterations:
+            entity = randomValidEntity()
+            saved = sut.save(entity)
             sut.delete(saved.id)
-            sut.delete(saved.id) // should not throw
-        }
-    }
+            sut.delete(saved.id)  // should not throw
 
-    @Test
-    fun `invariant - entity count never negative after operations`() {
-        repeat(100) {
-            val count = sut.count()
+    test "invariant - entity count never negative after operations":
+        for 100 iterations:
+            count = sut.count()
             assertTrue(count >= 0, "Entity count must never be negative")
-        }
-    }
-}
 ```
 
 **Guidelines:**
-- Use `Random(seed = 42)` for deterministic, reproducible tests
-- Use `repeat(100)` for lightweight property iteration
-- Write generators as extension functions on `Random`
-- Only use `kotlin.random` - no external property testing libraries
+- Use a deterministic seed for reproducible tests
+- Iterate each property 100 times for lightweight verification
+- Write generators using the language's standard random library
+- Prefer the standard library over external property testing dependencies
 - Name tests as property statements: "roundtrip - ...", "idempotence - ...", "invariant - ..."
 
-## kotlin-test Patterns
+## Common Assertion Patterns
 
-### Assertion Patterns
+Most test frameworks provide these assertion types:
 
-```kotlin
-// Equality
-assertEquals(expected, actual)
-assertNotEquals(unexpected, actual)
+| Assertion | Purpose |
+|-----------|---------|
+| `assertEquals(expected, actual)` | Equality check |
+| `assertNotEquals(a, b)` | Inequality check |
+| `assertNotNull(value)` | Non-null check |
+| `assertNull(value)` | Null/nil/None check |
+| `assertTrue(condition)` | Boolean truth |
+| `assertFalse(condition)` | Boolean falsity |
+| `assertThrows(ExceptionType, block)` | Expected exception |
+| `assertContains(collection, element)` | Collection membership |
 
-// Nullability
-assertNotNull(value)
-assertNull(value)
+Adapt names to your framework (e.g., `pytest.raises`, `expect(...).toBe(...)`, `assert.Equal`).
 
-// Boolean
-assertTrue(condition)
-assertFalse(condition)
+## Test Organization
 
-// Exceptions
-assertFailsWith<IllegalArgumentException> {
-    riskyOperation()
-}
+Group tests by scenario or method for readability:
 
-// Collections
-assertTrue(list.contains(element))
-assertEquals(expectedSize, list.size)
-assertTrue(list.isEmpty())
-```
+- **By method**: Group all tests for `save()` together, then `findById()`, etc.
+- **By scenario**: Group "valid input" tests, "invalid input" tests, "not found" tests
+- **Nesting**: Use your framework's grouping mechanism (nested classes, `describe`/`context` blocks, sub-tests) to create a hierarchy
 
-### Test Organization with Nested Classes
+## Test Data Helpers
 
-```kotlin
-class ModuleSpec {
+- **Factory methods**: Create functions like `validUser()` and `invalidUser()` with sensible defaults
+- **Parameterized defaults**: Allow overriding individual fields for specific test scenarios
+- **Random generators**: For property tests, write small generator functions using the standard library's random module
 
-    inner class `when valid input` {
-        @Test fun `returns success result`() { /* ... */ }
-        @Test fun `persists the entity`() { /* ... */ }
-    }
+## Test Lifecycle
 
-    inner class `when invalid input` {
-        @Test fun `throws IllegalArgumentException`() { /* ... */ }
-        @Test fun `does not modify state`() { /* ... */ }
-    }
-
-    inner class `when entity not found` {
-        @Test fun `returns null`() { /* ... */ }
-    }
-}
-```
-
-### Test Data Helpers
-
-```kotlin
-class UserSpec {
-
-    // Factory methods for test data
-    private fun validUser(
-        name: String = "Test User",
-        email: String = "test@example.com"
-    ) = User(name = name, email = email)
-
-    private fun invalidUser() = User(name = "", email = "not-an-email")
-
-    // Generators for property tests
-    private fun Random.user() = User(
-        name = alphaString(1..50),
-        email = email()
-    )
-
-    private fun Random.alphaString(length: IntRange = 1..50): String =
-        (1..nextInt(length.first, length.last + 1))
-            .map { ('a'..'z').random(this) }
-            .joinToString("")
-
-    private fun Random.email(): String =
-        "${alphaString(3..10)}@${alphaString(3..8)}.${alphaString(2..3)}"
-}
-```
-
-### Test Lifecycle
-
-```kotlin
-class StatefulModuleSpec {
-
-    private lateinit var sut: Module
-
-    // Setup before each test - recreate clean state
-    // In kotlin-test, use init block or property initialization
-    private val repository = InMemoryRepository()
-
-    @Test
-    fun `test with clean state`() {
-        // repository is fresh for each test class instance
-    }
-}
-```
+- Each test should start with clean state
+- Use your framework's setup/teardown mechanism (e.g., `@BeforeEach`, `setUp()`, `beforeEach`, `t.Cleanup()`)
+- Prefer creating fresh instances over resetting shared state
 
 ## Specification Quality Checklist
 
@@ -401,13 +307,13 @@ class StatefulModuleSpec {
 ### Reference Files
 
 For detailed guidance, consult:
-- **`references/kotlin-test-patterns.md`** - Idiomatic kotlin-test usage and assertion patterns
 - **`references/specification-checklist.md`** - Detailed completeness and quality checklist
 - **`references/property-testing-guide.md`** - Property identification and lightweight generator patterns
 
 ### Example Files
 
-Working examples in `examples/`:
-- **`examples/interface-contract-specs.md`** - Contract spec example for a Repository interface
-- **`examples/behavior-specs.md`** - BDD-style behavior spec example for user registration
-- **`examples/property-based-specs.md`** - Property-based spec example with generators
+Complete Kotlin examples in `examples/kotlin/`:
+- **`interface-contract-specs.md`** - Contract spec for a Repository interface
+- **`behavior-specs.md`** - BDD-style behavior spec for user registration
+- **`property-based-specs.md`** - Property-based spec with generators
+- **`kotlin-test-patterns.md`** - Idiomatic kotlin-test assertion and organization patterns

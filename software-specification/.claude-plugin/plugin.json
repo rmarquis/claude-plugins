@@ -1,9 +1,9 @@
 {
   "name": "software-specification",
   "version": "0.1.0",
-  "description": "Transforms architecture interfaces and requirement acceptance criteria into executable test specifications using kotlin-test",
+  "description": "Transforms architecture interfaces and requirement acceptance criteria into executable test specifications",
   "author": {
     "name": "Remy"
   },
-  "keywords": ["specification", "testing", "kotlin", "contracts", "bdd", "property-testing"]
+  "keywords": ["specification", "testing", "contracts", "bdd", "property-testing"]
 }
