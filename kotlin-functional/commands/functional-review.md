@@ -1,11 +1,11 @@
-# Command: review-functional
+# Command: functional-review
 
 Review Kotlin code for functional programming patterns and idiomatic usage.
 
 ## Usage
 
 ```bash
-/review-functional <file-or-dir>
+/functional-review <file-or-dir>
 ```
 
 ## Arguments
@@ -19,13 +19,13 @@ Review Kotlin code for functional programming patterns and idiomatic usage.
 
 ```bash
 # Review a single file
-/review-functional src/main/kotlin/userauth/UserService.kt
+/functional-review src/main/kotlin/userauth/UserService.kt
 
 # Review an entire module
-/review-functional src/main/kotlin/userauth
+/functional-review src/main/kotlin/userauth
 
 # Review entire source directory
-/review-functional src/main/kotlin
+/functional-review src/main/kotlin
 ```
 
 ## What This Command Does
@@ -258,16 +258,16 @@ Grades:
 
 ```bash
 # Generate report only, no interactive mode
-/review-functional src/ --report-only
+/functional-review src/ --report-only
 
 # Focus on specific criteria
-/review-functional src/ --criteria=immutability,error-handling
+/functional-review src/ --criteria=immutability,error-handling
 
 # Set minimum score threshold
-/review-functional src/ --min-score=80
+/functional-review src/ --min-score=80
 
 # Output format
-/review-functional src/ --format=json
+/functional-review src/ --format=json
 ```
 
 ## Output Files
@@ -290,7 +290,7 @@ The review can be integrated into CI pipelines:
 ```yaml
 # Example GitHub Action
 - name: Review Kotlin Code
-  run: claude /review-functional src/ --min-score=75 --report-only
+  run: claude /functional-review src/ --min-score=75 --report-only
 ```
 
 ### With Pre-commit Hooks

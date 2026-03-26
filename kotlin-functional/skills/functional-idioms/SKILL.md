@@ -1,4 +1,4 @@
-# Skill: kotlin-functional-idioms
+# Skill: functional-idioms
 
 Core knowledge of functional Kotlin patterns and idiomatic usage for generating high-quality, maintainable code.
 
@@ -586,7 +586,7 @@ Quick reference:
 
 ## When to Use This Skill
 
-Use kotlin-functional-idioms when:
+Use functional-idioms when:
 - Generating Kotlin implementation code
 - Reviewing existing Kotlin code
 - Refactoring to functional patterns

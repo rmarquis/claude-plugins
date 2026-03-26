@@ -1,11 +1,11 @@
-# Command: implement-functional
+# Command: functional-implement
 
 Generate functional Kotlin implementation from specifications.
 
 ## Usage
 
 ```bash
-/implement-functional <spec-or-module>
+/functional-implement <spec-or-module>
 ```
 
 ## Arguments
@@ -19,13 +19,13 @@ Generate functional Kotlin implementation from specifications.
 
 ```bash
 # Implement from a feature specification
-/implement-functional user-auth
+/functional-implement user-auth
 
 # Implement a specific module
-/implement-functional payment-processing
+/functional-implement payment-processing
 
 # Implement using package name
-/implement-functional com.example.orders
+/functional-implement com.example.orders
 ```
 
 ## What This Command Does
@@ -159,13 +159,13 @@ The command may support additional options:
 
 ```bash
 # Generate with specific style
-/implement-functional user-auth --style=arrow  # Use Arrow library types
+/functional-implement user-auth --style=arrow  # Use Arrow library types
 
 # Generate stubs only
-/implement-functional user-auth --stubs-only
+/functional-implement user-auth --stubs-only
 
 # Specify output package
-/implement-functional user-auth --package=com.custom.auth
+/functional-implement user-auth --package=com.custom.auth
 ```
 
 ## Notes
@@ -173,7 +173,7 @@ The command may support additional options:
 - **Side Effects**: Generated code focuses on pure domain logic. I/O operations (database, network, file system) are marked with TODO comments for manual implementation.
 - **Testing**: Generated code should be testable by contract specs from the specification plugin.
 - **Incremental**: Safe to re-run on existing code—will offer to merge or update existing files.
-- **Review**: Consider running `/review-functional` on generated code to verify quality.
+- **Review**: Consider running `/functional-review` on generated code to verify quality.
 
 ## Success Criteria
 
@@ -202,4 +202,4 @@ Generated implementation should:
 **Generated code doesn't match expectations:**
 - Review architecture documentation for clarity
 - Check contract specs for complete interface definitions
-- Run `/review-functional` to identify improvements
+- Run `/functional-review` to identify improvements

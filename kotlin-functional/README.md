@@ -27,7 +27,7 @@ requirements/  architecture/  specifications/  (idiomatic implementation)
 
 ## Commands
 
-### `/implement-functional [spec-or-module]`
+### `/functional-implement [spec-or-module]`
 
 Generate functional Kotlin implementation from specifications.
 
@@ -44,12 +44,12 @@ Generate functional Kotlin implementation from specifications.
 
 **Examples:**
 ```bash
-/implement-functional user-auth
-/implement-functional payment-processing
-/implement-functional com.example.orders
+/functional-implement user-auth
+/functional-implement payment-processing
+/functional-implement com.example.orders
 ```
 
-### `/review-functional [file-or-dir]`
+### `/functional-review [file-or-dir]`
 
 Review code for functional and idiomatic Kotlin patterns.
 
@@ -65,8 +65,8 @@ Review code for functional and idiomatic Kotlin patterns.
 
 **Examples:**
 ```bash
-/review-functional src/main/kotlin/userauth
-/review-functional src/main/kotlin/userauth/UserRepository.kt
+/functional-review src/main/kotlin/userauth
+/functional-review src/main/kotlin/userauth/UserRepository.kt
 ```
 
 ## Functional Patterns Supported
@@ -163,7 +163,7 @@ A well-implemented Kotlin codebase should:
 
 1. Copy the `kotlin-functional/` directory to your Claude Code plugins location
 2. The plugin will be automatically discovered by Claude Code
-3. Use `/implement-functional` or `/review-functional` commands in your project
+3. Use `/functional-implement` or `/functional-review` commands in your project
 
 ## License
 
