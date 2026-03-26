@@ -188,4 +188,4 @@ Generate executable Kotlin test specifications from architecture and requirement
 - Use `TODO("Provide implementation")` for implementations that don't exist yet
 - Keep generators simple using `kotlin.random` extension functions
 
-Use the executable-specifications skill for guidance on specification patterns, kotlin-test idioms, and property testing techniques.
+Use the specification-engineering skill for guidance on specification patterns, kotlin-test idioms, and property testing techniques.

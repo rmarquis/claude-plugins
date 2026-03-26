@@ -33,7 +33,7 @@ Design internal software architecture from requirements documentation, applying 
    - **Deep modules**: Maximize functionality behind simple interfaces
    - **Information hiding**: Encapsulate decisions likely to change
    - **Different layer, different abstraction**: Each layer adds value
-   - Use the ousterhout-design-principles skill for guidance
+   - Use the architecture-design skill for guidance
 
 5. **Generate Architecture Document**
    Create `docs/architecture/<feature-name>.md` with:

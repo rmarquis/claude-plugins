@@ -14,16 +14,16 @@ Specifications are derived from architecture documents (produced by `software-ar
 
 ## Components
 
-- **Command**: `/specify` - Generate executable specifications from architecture and requirements
+- **Command**: `/specification-write` - Generate executable specifications from architecture and requirements
 - **Agent**: `specification-writer` - Autonomous agent for writing test specifications
-- **Skill**: `executable-specifications` - Knowledge for writing contract, behavior, and property-based specs
+- **Skill**: `specification-engineering` - Knowledge for writing contract, behavior, and property-based specs
 
 ## Usage
 
 ### Command
 
 ```
-/specify [architecture-file-or-module-name]
+/specification-write [architecture-file-or-module-name]
 ```
 
 Reads architecture and requirements documents, then generates executable specifications saved to `docs/specifications/<feature-name>/`.
@@ -64,9 +64,9 @@ Each file is a `.kt` specification file using `kotlin-test` that can later be mo
 
 This plugin completes the specification-first workflow:
 
-1. Use `/refine-requirements` to create structured requirements
-2. Use `/design-architecture` to design the architecture
-3. Use `/specify` to generate executable specifications
+1. Use `/requirements-refine` to create structured requirements
+2. Use `/architecture-design` to design the architecture
+3. Use `/specification-write` to generate executable specifications
 4. Implement against the specifications in `src/main/kotlin/` + `src/test/kotlin/`
 
 ## Design Decisions

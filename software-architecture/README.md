@@ -17,7 +17,7 @@ This plugin takes structured requirements documents (produced by the `software-r
 ### Command
 
 ```
-/design-architecture [requirements-file-or-feature-name]
+/architecture-design [requirements-file-or-feature-name]
 ```
 
 Analyzes requirements and interactively designs architecture, saving to `docs/architecture/`.
@@ -48,6 +48,6 @@ Architecture documents include:
 
 This plugin is designed to work after `software-requirements`:
 
-1. Use `/refine-requirements` to create structured requirements
-2. Use `/design-architecture` to design the architecture
+1. Use `/requirements-refine` to create structured requirements
+2. Use `/architecture-design` to design the architecture
 3. Architecture references and implements the requirements

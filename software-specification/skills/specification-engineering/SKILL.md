@@ -1,5 +1,5 @@
 ---
-name: Executable Specifications
+name: specification-engineering
 description: This skill should be used when the user asks to "write specifications", "create test specs", "specify interfaces", "contract testing", "behavior specifications", "property-based testing", "BDD specs", "given when then", "specification-first", "contract-first", "executable contracts", "kotlin-test specifications", "test before implementation", "formal contracts", "interface contracts", or discusses writing executable tests that define behavior before implementation. Provides patterns for contract, behavior, and property-based specifications using kotlin-test.
 version: 0.1.0
 ---

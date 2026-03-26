@@ -10,7 +10,7 @@ A Claude Code plugin that transforms informal feature descriptions into structur
 
 ## Components
 
-- **Command**: `/refine-requirements` - Explicitly start requirements refinement
+- **Command**: `/requirements-refine` - Explicitly start requirements refinement
 - **Agent**: `requirements-refiner` - Autonomous agent for requirements analysis
 - **Skill**: `requirements-engineering` - Knowledge for structuring requirements
 
@@ -19,7 +19,7 @@ A Claude Code plugin that transforms informal feature descriptions into structur
 ### Explicit Command
 
 ```
-/refine-requirements
+/requirements-refine
 ```
 
 Then describe what you want to build.

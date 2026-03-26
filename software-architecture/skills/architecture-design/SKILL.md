@@ -1,5 +1,5 @@
 ---
-name: Ousterhout Design Principles
+name: architecture-design
 description: This skill should be used when the user asks to "design architecture", "design software", "design modules", "reduce complexity", "create deep modules", "information hiding", "module interfaces", "review module depth", "shallow modules", "design it twice", "pull complexity down", "define errors out of existence", mentions "Ousterhout" or "Philosophy of Software Design", or discusses software architecture design principles. Provides John Ousterhout's principles for creating software with minimal complexity.
 version: 0.1.0
 ---

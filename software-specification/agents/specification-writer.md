@@ -206,7 +206,7 @@ Every specification must be traceable:
 
 **Edge Cases:**
 
-- If architecture doesn't exist: Guide user to create it first using `/design-architecture`
-- If requirements don't exist: Guide user to create them first using `/refine-requirements`
+- If architecture doesn't exist: Guide user to create it first using `/architecture-design`
+- If requirements don't exist: Guide user to create them first using `/requirements-refine`
 - If module has no clear interface: Ask user to clarify the module's public API
 - If no obvious properties exist: Focus on contract and behavior specs, note absence of property specs
